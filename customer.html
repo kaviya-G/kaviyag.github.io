@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<style>
+    table {
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 16px;
+
+}
+
+tr:nth-child(even) {
+  background-color: #E97676;
+}
+tr:nth-child(odd){
+    background-color:#51B7DC;
+    font-color:#ffe6e6;
+}
+.navbar-custom {
+    background-color:#006666;
+    padding: 30px;
+}
+h2{
+    text-align: center;
+    font-family:Bodoni72Smallcaps;
+    text-shadow: 2px 2px #2222E8;
+}
+* {
+  box-sizing: border-box;
+}
+input[type=text], select, textarea 
+{
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+
+
+}
+</style>
+</head>
+
+<body>
+    <nav class="navbar-custom">
+    <div style = "position:absolute; left:600px; top:10px;">
+   <button class="btn btn-info" data-toggle="modal" data-target="#sendMoney">Send Money</button>
+        <a class="btn btn-info" href="history.html" data-toggle="modal" data-target="#transactionHistory">See All Transactions</a>
+    </div></nav>
+
+    
+    <div class="modal fade" id="sendMoney" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Send Money</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                            <div class="input-group mb-3">
+                            <input type="text" id="enterSName" class="form-control" placeholder="Sender's username"
+                                aria-label="Sender's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">@email.com</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="enterName" class="form-control" placeholder="Recipient's username"
+                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2">@email.com</span>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><span>&#8377;</span></span>
+                            </div>
+                            <input type="text" id="enterAmount" class="form-control" placeholder=" Enter Amount"
+                                aria-label="Amount">
+                            <div class="input-group-append">
+                                <span class="input-group-text">.00</span>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button"class="btn btn-success" onclick="sendMoney()"  data-dismiss="modal">Send
+                        Money</button>
+                       
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="modal fade" id="transactionHistory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Transaction History</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ol id="transaction-history-body">
+
+                    </ol>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+<table>
+    <b>
+    <tr>
+        <th>S.No</th>
+        <th>Customer Name</th>
+        <th>Email address</th>
+        <th>Balance </th>
+       
+    <tr>
+        
+        <td scope="row">1</td>
+        <td>Kaviya.G</td>
+        <td>kaviyag@gmail.com</td>
+        <td> <p id="kaviyagBankBalance">60000 </p></td>
+        
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Kirthika.G</td>
+        <td>kirthikag@gmail.com</td>
+        <td> <p id="kirthikagBankBalance"> 55000 </p></td>
+        
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Theepicka.V</td>
+        <td>theepickav@gmail.com</td>
+        <td> <p id="theepickavBankBalance">46200 </p></td>
+        
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Charu.V</td>
+        <td>charuv@gmail.com</td>
+        <td> <p id="charuvBankBalance"> 16700 </p></td>
+        
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Tharani.S</td>
+        <td>tharanis@gmail.com</td>
+        <td> <p id="tharanisBankBalance"><span>&#8377;</span> 21269</p></td>
+       
+    </tr>
+    <tr>
+        <td>6</td>
+        <td>Gopinathan.J</td>
+        <td>gopinathanj@gmail.com</td>
+        <td> <p id="gopinathanjBankBalance"><span>&#8377;</span> 23662<p></td>
+        
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>Vardhan.S</td>
+        <td>vardhans@gmail.com</td>
+        <td> <p id="vardhansBankBalance"><span>&#8377;</span> 25767 </p></td>
+        
+    </tr>
+    <tr>
+        <td>8</td>
+        <td>Malathi.V</td>
+        <td>malathiv@gmail.com</td>
+        <td> <p id="malathivBankBalance"><span>&#8377;</span> 71890 </p></td>
+        
+    </tr>
+    <tr>
+        <td>9</td>
+        <td>Yuvaraj.D</td>
+        <td>yuvarajd@gmail.com</td>
+        <td> <p id="yuvarajdBankBalance"> 27798 </p></td>
+        
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>Nagaraj.T</td>
+        <td>nagz@gmail.com</td>
+        <td> <p id="nagzBankBalance">67456 </p></td>
+       
+    </tr>
+<script type="text/javascript" src="script.js"> </script>
+</table>
+
+</section>
+
+
+</body>
+</html>
